@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.cobeosijek.articlesapp.ArticleDetailsActivity">
+
+    <FrameLayout
+        android:id="@+id/action_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorOrange">
+
+        <TextView
+            android:id="@+id/action_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_big"
+            android:gravity="center"
+            android:text="@string/article_details_title"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_title_size" />
+
+        <ImageView
+            android:id="@+id/action_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/default_margin_big"
+            android:clickable="true"
+            android:src="@drawable/back_icon" />
+
+        <ImageView
+            android:id="@+id/action_bar_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="@dimen/default_margin_big"
+            android:src="@drawable/edit_icon" />
+
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/article_title_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/default_margin_small"
+        android:textSize="@dimen/text_title_size"
+        android:textStyle="bold"
+        tools:text="Article title" />
+
+    <TextView
+        android:id="@+id/article_author_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="@dimen/text_title_size"
+        tools:text="Author: Article author" />
+
+    <TextView
+        android:id="@+id/article_type_output"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="@dimen/default_margin_small"
+        android:textSize="@dimen/text_title_size"
+        tools:text="Type: Type" />
+
+    <TextView
+        android:id="@+id/article_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small"
+        android:textSize="@dimen/text_title_size"
+        tools:text="Kreiraj activity koji ces nazvati ArticlesActivity. Pridruzi mu xml layout koji ce izgledati kao na slici articles_list. Ucitaj sve clanke iz Realm baze podataka, ukoliko nema clanaka, prikazati tekst kao na slici articles_list_empty." />
+
+</LinearLayout>

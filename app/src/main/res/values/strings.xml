@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">ArticlesApp</string>
+    <string name="articles_title_text">Articles</string>
+    <string name="no_data_message_text">No Data</string>
+    <string name="add_article_title_text">Add article</string>
+    <string name="article_author_input_hint_text">Author</string>
+    <string name="article_title_input_hint_text">Title</string>
+    <string name="article_description_input_hint_text">Description</string>
+    <string name="save_button_text">SAVE</string>
+    <string name="article_details_title">Article details</string>
+    <string name="edit_article_title_text">Edit article</string>
+    <string name="save_changes_button_text">SAVE CHANGES</string>
 </resources>

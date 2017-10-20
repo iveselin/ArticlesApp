@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.cobeosijek.articlesapp.AddArticleActivity">
+
+    <FrameLayout
+        android:id="@+id/action_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/colorOrange">
+
+        <TextView
+            android:id="@+id/action_bar_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/default_margin_big"
+            android:gravity="center"
+            android:text="@string/edit_article_title_text"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/text_title_size" />
+
+        <ImageView
+            android:id="@+id/action_bar_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/default_margin_big"
+            android:clickable="true"
+            android:src="@drawable/back_icon" />
+
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/article_author_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small"
+        android:hint="@string/article_author_input_hint_text" />
+
+    <EditText
+        android:id="@+id/article_title_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small"
+        android:hint="@string/article_title_input_hint_text" />
+
+    <EditText
+        android:id="@+id/article_description_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small"
+        android:hint="@string/article_description_input_hint_text" />
+
+    <Spinner
+        android:id="@+id/article_type_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small" />
+
+    <Button
+        android:id="@+id/submit_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/default_margin_small"
+        android:background="@color/colorOrange"
+        android:text="@string/save_changes_button_text"
+        android:textColor="@color/colorWhite" />
+
+
+</LinearLayout>
