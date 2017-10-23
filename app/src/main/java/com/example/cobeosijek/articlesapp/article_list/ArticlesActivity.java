@@ -57,8 +57,12 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
         articlesList.setAdapter(articleAdapter);
 
         articleAdapter.setArticleList(dbHelper.getArticles());
+
+        // TODO: 23/10/2017  put into loadData method
         if (articleAdapter.getItemCount() < 1) {
             noDataMessage.setVisibility(View.VISIBLE);
+        } else {
+            noDataMessage.setVisibility(View.GONE);
         }
     }
 
