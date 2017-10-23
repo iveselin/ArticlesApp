@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cobeosijek.articlesapp.ArticlesActivity">
+    tools:context="com.example.cobeosijek.articlesapp.article_list.ArticlesActivity">
 
     <FrameLayout
         android:id="@+id/action_bar_layout"
@@ -38,6 +38,7 @@
         android:visibility="gone" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/add_articles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
