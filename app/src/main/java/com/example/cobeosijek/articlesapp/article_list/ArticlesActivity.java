@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cobeosijek.articlesapp.AddArticleActivity;
 import com.example.cobeosijek.articlesapp.ArticleApplication;
@@ -17,8 +18,8 @@ import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 
 public class ArticlesActivity extends AppCompatActivity implements View.OnClickListener, ArticleAdapter.OnItemClickListener {
 
-    private static final String KEY_ARTICLE_SEND = "article";
-    private static final int KEY_ARTICLE_REQUEST = 22;
+//    private static final String KEY_ARTICLE_SEND = "article";
+//    private static final int KEY_ARTICLE_REQUEST = 22;
 
     TextView noDataMessage;
     RecyclerView articlesList;
@@ -26,9 +27,9 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
     ArticleAdapter articleAdapter;
     DBHelper dbHelper;
 
-    public static Intent getResultArticleIntent(Article article) {
-        return new Intent().putExtra(KEY_ARTICLE_SEND, article);
-    }
+//    public static Intent getResultArticleIntent(Article article) {
+//        return new Intent().putExtra(KEY_ARTICLE_SEND, article);
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,12 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
 
         dbHelper = new DBHelper(ArticleApplication.getDBinstance());
         setUI();
+    }
+
+    @Override
+    protected void onResume() {
+        loadData();
+        super.onResume();
     }
 
     private void setUI() {
@@ -56,41 +63,53 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
         articlesList.setLayoutManager(layoutManager);
         articlesList.setAdapter(articleAdapter);
 
+        loadData();
+    }
+
+    //    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        if (resultCode == RESULT_OK) {
+//            switch (requestCode) {
+//                case KEY_ARTICLE_REQUEST:
+//                    if (data.getSerializableExtra(KEY_ARTICLE_SEND) != null) {
+//                        dbHelper.addArticle((Article) data.getSerializableExtra(KEY_ARTICLE_SEND));
+//                    }
+//                    break;
+//            }
+//            loadData();
+//        }
+//    }
+
+    public void loadData() {
         articleAdapter.setArticleList(dbHelper.getArticles());
 
-        // TODO: 23/10/2017  put into loadData method
         if (articleAdapter.getItemCount() < 1) {
             noDataMessage.setVisibility(View.VISIBLE);
         } else {
             noDataMessage.setVisibility(View.GONE);
         }
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case KEY_ARTICLE_REQUEST:
-                    // TODO: 23/10/2017 check if there is any and notifiy adapter
-                    dbHelper.addArticle((Article) data.getSerializableExtra(KEY_ARTICLE_SEND));
-                    break;
-            }
-        }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.add_articles:
-                startActivityForResult(AddArticleActivity.getLaunchIntent(this), KEY_ARTICLE_REQUEST);
+                startActivity(AddArticleActivity.getLaunchIntent(this));
+//              startActivityForResult(AddArticleActivity.getLaunchIntent(this),KEY_ARTICLE_REQUEST);
                 break;
         }
     }
 
     @Override
     public void onItemClick(View view, int position) {
-        // TODO: 23/10/2017 on long click
+        // TODO: 23.10.2017. go to descrip. activity 
+        Toast.makeText(getApplicationContext(), "Item was clicked, but not deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemLongClick(View view, int position) {
         dbHelper.removeArticle(articleAdapter.getArticle(position));
-        // TODO: 23/10/2017 notify recycler view
+        loadData();
     }
 }

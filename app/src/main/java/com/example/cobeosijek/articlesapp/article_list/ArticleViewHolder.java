@@ -10,7 +10,7 @@ import com.example.cobeosijek.articlesapp.R;
  * Created by cobeosijek on 23/10/2017.
  */
 
-public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
     private ArticleAdapter.OnItemClickListener listener;
     TextView articleTitle;
@@ -25,6 +25,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
         this.listener = listener;
 
         itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
     }
 
     @Override
@@ -32,5 +33,13 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
         if (listener != null) {
             listener.onItemClick(view, getAdapterPosition());
         }
+    }
+
+    @Override
+    public boolean onLongClick(View view) {
+        if (listener!=null){
+            listener.onItemLongClick(view, getAdapterPosition());
+        }
+       return true;
     }
 }
