@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/default_margin_small"
         android:textSize="@dimen/text_title_size"
+        android:scrollbars="vertical"
         tools:text="Kreiraj activity koji ces nazvati ArticlesActivity. Pridruzi mu xml layout koji ce izgledati kao na slici articles_list. Ucitaj sve clanke iz Realm baze podataka, ukoliko nema clanaka, prikazati tekst kao na slici articles_list_empty." />
 
 </LinearLayout>

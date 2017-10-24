@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
@@ -46,7 +47,12 @@ public class EditArticleActivity extends AppCompatActivity implements View.OnCli
 
     private void getExtras() {
         if (getIntent().hasExtra(KEY_ID_SEND)) {
-            articleToEdit = dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1));
+            if (dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1)) != null) {
+                articleToEdit = dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1));
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.no_article_error_text, Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 
@@ -97,20 +103,6 @@ public class EditArticleActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-//        switch (i) {
-//            case 0:
-//                typeSelected = ArticleTypeEnum.POLITIC;
-//                break;
-//            case 1:
-//                typeSelected = ArticleTypeEnum.SPORT;
-//                break;
-//            case 2:
-//                typeSelected = ArticleTypeEnum.DEVELOP;
-//                break;
-//            case 3:
-//                typeSelected = ArticleTypeEnum.OTHER;
-//                break;
-//        }
         typeSelected = (ArticleTypeEnum) adapterView.getItemAtPosition(i);
     }
 

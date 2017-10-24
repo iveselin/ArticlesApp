@@ -1,7 +1,9 @@
 package com.example.cobeosijek.articlesapp.article_list;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -106,8 +108,31 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onItemLongClick(View view, int position) {
-        // TODO: 24/10/2017 open a dialog about delete
+    public void onItemLongClick(View view, final int position) {
+
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+        alertBuilder.setMessage(R.string.dialog_delete_message);
+
+        alertBuilder.setPositiveButton(R.string.dialog_positive_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                deleteArticle(position);
+            }
+        });
+
+        alertBuilder.setNegativeButton(R.string.dialog_negative_text, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+    }
+
+
+    public void deleteArticle(int position) {
         dbHelper.removeArticle(articleAdapter.getArticle(position));
         loadData();
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,7 +49,12 @@ public class ArticleDetailsActivity extends AppCompatActivity implements View.On
 
     private void getExtras() {
         if (getIntent().hasExtra(KEY_ID_SEND)) {
-            articleToDisplay = dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1));
+            if (dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1)) != null) {
+                articleToDisplay = dbHelper.getArticle(getIntent().getIntExtra(KEY_ID_SEND, -1));
+            } else {
+                Toast.makeText(getApplicationContext(), R.string.no_article_error_text, Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
     }
 
@@ -62,6 +68,8 @@ public class ArticleDetailsActivity extends AppCompatActivity implements View.On
 
         backIcon.setOnClickListener(this);
         editIcon.setOnClickListener(this);
+
+        descriptionOutput.setMovementMethod(new ScrollingMovementMethod());
 
         loadArticle();
     }

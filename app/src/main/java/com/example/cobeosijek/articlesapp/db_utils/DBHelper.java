@@ -11,7 +11,7 @@ import io.realm.Realm;
  */
 
 public class DBHelper {
-    Realm realm;
+    private Realm realm;
 
     public DBHelper(Realm realm) {
         this.realm = realm;
@@ -37,17 +37,22 @@ public class DBHelper {
     }
 
     public void updateArticle(Article article) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(article);
-        realm.commitTransaction();
+        if (article != null) {
+            realm.beginTransaction();
+            realm.copyToRealmOrUpdate(article);
+            realm.commitTransaction();
+        }
     }
 
     public void removeArticle(Article article) {
-        // TODO: 23/10/2017 implement checks
-        realm.beginTransaction();
-        Article articleToDelete = realm.where(Article.class).equalTo("articleTitle", article.getArticleTitle()).findFirst();
-        articleToDelete.deleteFromRealm();
-        realm.commitTransaction();
+        if (article != null) {
+            realm.beginTransaction();
+            Article articleToDelete = realm.where(Article.class).equalTo("articleTitle", article.getArticleTitle()).findFirst();
+            if (articleToDelete != null) {
+                articleToDelete.deleteFromRealm();
+            }
+            realm.commitTransaction();
+        }
     }
 
     public Article getArticle(int articleID) {

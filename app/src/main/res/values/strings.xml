@@ -13,4 +13,8 @@
     <string name="no_article_error_text">No article found</string>
     <string name="author_format">Author: %s</string>
     <string name="type_format">Type: %s</string>
+    <string name="dialog_delete_message">Are you sure you want to delete this item?</string>
+    <string name="dialog_positive_text">Yes</string>
+    <string name="dialog_negative_text">No</string>
+    <string name="empty_text_error">This field is required</string>
 </resources>

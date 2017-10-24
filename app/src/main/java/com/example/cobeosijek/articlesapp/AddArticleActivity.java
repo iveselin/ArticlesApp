@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
+import com.example.cobeosijek.articlesapp.utils.StringUtils;
 
 public class AddArticleActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
@@ -70,30 +71,39 @@ public class AddArticleActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void saveArticle() {
-        // TODO: 23.10.2017. check user input 
-        Article articleToSave = new Article(titleInput.getText().toString(), authorInput.getText().toString(), descriptionInput.getText().toString(), typeSelected);
-        dbHelper.addArticle(articleToSave);
-        finish();
+        // TODO: 23.10.2017. check user input
+        if (checkUserInputValid()) {
+            Article articleToSave = new Article(titleInput.getText().toString(), authorInput.getText().toString(), descriptionInput.getText().toString(), typeSelected);
+            dbHelper.addArticle(articleToSave);
+            finish();
+        }
+
+    }
+
+    private boolean checkUserInputValid() {
+        boolean inputIsValid = true;
+
+        if (StringUtils.checkIfEmpty(titleInput.getText().toString().trim())) {
+            titleInput.setError(getString(R.string.empty_text_error));
+            inputIsValid = false;
+        }
+
+        if (StringUtils.checkIfEmpty(authorInput.getText().toString().trim())) {
+            authorInput.setError(getString(R.string.empty_text_error));
+            inputIsValid = false;
+        }
+
+        if (StringUtils.checkIfEmpty(descriptionInput.getText().toString().trim())) {
+            descriptionInput.setError(getString(R.string.empty_text_error));
+            inputIsValid = false;
+        }
+
+        return inputIsValid;
     }
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        // TODO: 23.10.2017. not like this!!
-        switch (i) {
-            case 0:
-                typeSelected = ArticleTypeEnum.POLITIC;
-                break;
-            case 1:
-                typeSelected = ArticleTypeEnum.SPORT;
-                break;
-            case 2:
-                typeSelected = ArticleTypeEnum.DEVELOP;
-                break;
-            case 3:
-                typeSelected = ArticleTypeEnum.OTHER;
-                break;
-        }
-
+        typeSelected = (ArticleTypeEnum) adapterView.getItemAtPosition(i);
     }
 
     @Override
@@ -102,7 +112,7 @@ public class AddArticleActivity extends AppCompatActivity implements View.OnClic
     }
 
 //    private void sendArticleBack() {
-//        // TODO: 23/10/2017 check user input!!
+//
 //        Article article = new Article(titleInput.getText().toString(), authorInput.getText().toString(), descriptionInput.getText().toString(), ArticleTypeEnum.DEVELOP);
 //        setResult(RESULT_OK, ArticlesActivity.getResultArticleIntent(article));
 //        finish();
