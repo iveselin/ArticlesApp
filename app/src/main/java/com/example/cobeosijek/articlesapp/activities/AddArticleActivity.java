@@ -1,4 +1,4 @@
-package com.example.cobeosijek.articlesapp;
+package com.example.cobeosijek.articlesapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.example.cobeosijek.articlesapp.ArticleApplication;
+import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
@@ -71,9 +73,11 @@ public class AddArticleActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void saveArticle() {
-        // TODO: 23.10.2017. check user input
         if (checkUserInputValid()) {
-            Article articleToSave = new Article(titleInput.getText().toString(), authorInput.getText().toString(), descriptionInput.getText().toString(), typeSelected);
+            Article articleToSave = new Article(titleInput.getText().toString().trim(),
+                    authorInput.getText().toString().trim(),
+                    descriptionInput.getText().toString().trim(),
+                    typeSelected);
             dbHelper.addArticle(articleToSave);
             finish();
         }

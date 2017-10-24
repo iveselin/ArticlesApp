@@ -61,6 +61,10 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
     }
 
     public Article getArticle(int position) {
-        return articles.get(position);
+        if (position <= articles.size() && articles.get(position) != null) {
+            return articles.get(position);
+        } else {
+            return null;
+        }
     }
 }

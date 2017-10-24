@@ -1,4 +1,4 @@
-package com.example.cobeosijek.articlesapp.article_list;
+package com.example.cobeosijek.articlesapp.activities;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -11,10 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.cobeosijek.articlesapp.AddArticleActivity;
+import com.example.cobeosijek.articlesapp.activities.AddArticleActivity;
 import com.example.cobeosijek.articlesapp.ArticleApplication;
-import com.example.cobeosijek.articlesapp.ArticleDetailsActivity;
+import com.example.cobeosijek.articlesapp.activities.ArticleDetailsActivity;
 import com.example.cobeosijek.articlesapp.R;
+import com.example.cobeosijek.articlesapp.article_list.ArticleAdapter;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 
 public class ArticlesActivity extends AppCompatActivity implements View.OnClickListener, ArticleAdapter.OnItemClickListener {
@@ -89,7 +90,6 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
         } else {
             noDataMessage.setVisibility(View.GONE);
         }
-
     }
 
     @Override

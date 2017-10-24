@@ -1,4 +1,4 @@
-package com.example.cobeosijek.articlesapp;
+package com.example.cobeosijek.articlesapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cobeosijek.articlesapp.ArticleApplication;
+import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 
@@ -43,6 +45,7 @@ public class ArticleDetailsActivity extends AppCompatActivity implements View.On
 
     @Override
     protected void onResume() {
+        getExtras();
         loadArticle();
         super.onResume();
     }
@@ -87,13 +90,12 @@ public class ArticleDetailsActivity extends AppCompatActivity implements View.On
     }
 
     private void loadArticle() {
-        getExtras();
-
         if (articleToDisplay != null) {
             titleOutput.setText(articleToDisplay.getArticleTitle());
             authorOutput.setText(String.format(getString(R.string.author_format), articleToDisplay.getArticleAuthor()));
             typeOutput.setText(String.format(getString(R.string.type_format), articleToDisplay.getArticleTypeString()));
             descriptionOutput.setText(articleToDisplay.getArticleDescription());
+
         } else {
             Toast.makeText(getApplicationContext(), R.string.no_article_error_text, Toast.LENGTH_SHORT).show();
             finish();

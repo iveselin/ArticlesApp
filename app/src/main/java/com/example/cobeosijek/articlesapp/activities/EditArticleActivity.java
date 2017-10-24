@@ -1,4 +1,4 @@
-package com.example.cobeosijek.articlesapp;
+package com.example.cobeosijek.articlesapp.activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.cobeosijek.articlesapp.ArticleApplication;
+import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
@@ -24,6 +26,7 @@ public class EditArticleActivity extends AppCompatActivity implements View.OnCli
     private Article articleToEdit;
     private DBHelper dbHelper;
     private ArticleTypeEnum typeSelected;
+    private ArrayAdapter<ArticleTypeEnum> spinnerAdapter;
     ImageView backIcon;
     EditText authorInput;
     EditText titleInput;
@@ -67,10 +70,14 @@ public class EditArticleActivity extends AppCompatActivity implements View.OnCli
         backIcon.setOnClickListener(this);
         submitArticle.setOnClickListener(this);
 
-        ArrayAdapter<ArticleTypeEnum> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ArticleTypeEnum.values());
+        spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ArticleTypeEnum.values());
         typeInput.setAdapter(spinnerAdapter);
         typeInput.setOnItemSelectedListener(this);
 
+        setArticle();
+    }
+
+    private void setArticle() {
         if (articleToEdit != null) {
             authorInput.setText(articleToEdit.getArticleAuthor());
             titleInput.setText(articleToEdit.getArticleTitle());
@@ -97,6 +104,7 @@ public class EditArticleActivity extends AppCompatActivity implements View.OnCli
         articleToEdit.setArticleDescription(descriptionInput.getText().toString());
         articleToEdit.setArticleTitle(titleInput.getText().toString());
         articleToEdit.setArticleType(typeSelected);
+
         dbHelper.updateArticle(articleToEdit);
         finish();
     }
