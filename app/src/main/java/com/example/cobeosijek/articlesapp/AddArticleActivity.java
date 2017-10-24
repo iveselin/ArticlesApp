@@ -14,7 +14,6 @@ import android.widget.Spinner;
 
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
-import com.example.cobeosijek.articlesapp.article_list.ArticlesActivity;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 
 public class AddArticleActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {

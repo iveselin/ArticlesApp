@@ -10,4 +10,7 @@
     <string name="article_details_title">Article details</string>
     <string name="edit_article_title_text">Edit article</string>
     <string name="save_changes_button_text">SAVE CHANGES</string>
+    <string name="no_article_error_text">No article found</string>
+    <string name="author_format">Author: %s</string>
+    <string name="type_format">Type: %s</string>
 </resources>

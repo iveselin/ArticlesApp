@@ -16,8 +16,7 @@ public class ArticleApplication extends Application {
 
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
-                .name("articles_database.realm")
-                .schemaVersion(0)
+                .deleteRealmIfMigrationNeeded()
                 .build();
         Realm.setDefaultConfiguration(realmConfig);
     }

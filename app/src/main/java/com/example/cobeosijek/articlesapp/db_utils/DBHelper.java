@@ -18,9 +18,18 @@ public class DBHelper {
     }
 
     public void addArticle(Article article) {
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(article);
-        realm.commitTransaction();
+        if (article != null) {
+            int id;
+            realm.beginTransaction();
+            if (realm.where(Article.class).count() == 0) {
+                id = 0;
+            } else {
+                id = realm.where(Article.class).max("articleID").intValue() + 1;
+            }
+            article.setArticleID(id);
+            realm.copyToRealmOrUpdate(article);
+            realm.commitTransaction();
+        }
     }
 
     public List<Article> getArticles() {
@@ -39,5 +48,9 @@ public class DBHelper {
         Article articleToDelete = realm.where(Article.class).equalTo("articleTitle", article.getArticleTitle()).findFirst();
         articleToDelete.deleteFromRealm();
         realm.commitTransaction();
+    }
+
+    public Article getArticle(int articleID) {
+        return realm.copyFromRealm(realm.where(Article.class).equalTo("articleID", articleID).findFirst());
     }
 }

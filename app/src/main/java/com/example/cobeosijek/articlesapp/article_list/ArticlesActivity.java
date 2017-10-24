@@ -1,6 +1,5 @@
 package com.example.cobeosijek.articlesapp.article_list;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cobeosijek.articlesapp.AddArticleActivity;
 import com.example.cobeosijek.articlesapp.ArticleApplication;
+import com.example.cobeosijek.articlesapp.ArticleDetailsActivity;
 import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 
@@ -103,12 +102,12 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onItemClick(View view, int position) {
-        // TODO: 23.10.2017. go to descrip. activity 
-        Toast.makeText(getApplicationContext(), "Item was clicked, but not deleted", Toast.LENGTH_SHORT).show();
+        startActivity(ArticleDetailsActivity.getLaunchIntent(this, articleAdapter.getArticle(position).getArticleID()));
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
+        // TODO: 24/10/2017 open a dialog about delete
         dbHelper.removeArticle(articleAdapter.getArticle(position));
         loadData();
     }
