@@ -33,7 +33,4 @@ public class ArticleApplication extends Application {
     public static ArticleApplication getInstance() {
         return instance;
     }
-
-
-    // TODO: 25/10/2017 lazy singleton
 }

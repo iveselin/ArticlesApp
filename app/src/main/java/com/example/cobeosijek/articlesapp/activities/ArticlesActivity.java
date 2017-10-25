@@ -1,9 +1,7 @@
 package com.example.cobeosijek.articlesapp.activities;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,12 +12,15 @@ import android.widget.TextView;
 import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.article_list.ArticleAdapter;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
+import com.example.cobeosijek.articlesapp.utils.DialogUtils;
+import com.example.cobeosijek.articlesapp.utils.OnDeleteListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ArticlesActivity extends AppCompatActivity implements View.OnClickListener, ArticleAdapter.OnItemClickListener {
+public class ArticlesActivity extends AppCompatActivity implements View.OnClickListener, ArticleAdapter.OnItemClickListener, OnDeleteListener {
 
+    // TODO: 25/10/2017 add 3 fragments, and display them in a activity before this one, implement forward and back buttons and use backstack to do so
 
     @BindView(R.id.no_data_message)
     TextView noDataMessage;
@@ -27,6 +28,7 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
     RecyclerView articlesList;
     @BindView(R.id.add_articles)
     FloatingActionButton addArticleBTN;
+
     private ArticleAdapter articleAdapter;
 
 
@@ -83,36 +85,17 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onItemClick(View view, int articleId) {
+    public void onItemClick(int articleId) {
         startActivity(ArticleDetailsActivity.getLaunchIntent(this, articleId));
     }
 
     @Override
-    public void onItemLongClick(View view, final int articleId) {
-
-        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-        alertBuilder.setMessage(R.string.dialog_delete_message);
-
-        alertBuilder.setPositiveButton(R.string.dialog_positive_text, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                deleteArticle(articleId);
-            }
-        });
-
-        alertBuilder.setNegativeButton(R.string.dialog_negative_text, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
-
-        AlertDialog alertDialog = alertBuilder.create();
-        alertDialog.show();
+    public void onItemLongClick(final int articleId) {
+        DialogUtils.showDialog(this, articleId, this);
     }
 
-
-    private void deleteArticle(int articleId) {
+    @Override
+    public void deleteArticle(int articleId) {
         DBHelper.getInstance().removeArticle(articleId);
         loadData();
     }

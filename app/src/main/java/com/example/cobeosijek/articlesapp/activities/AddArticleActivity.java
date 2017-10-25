@@ -23,6 +23,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class AddArticleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
     @BindView(R.id.action_bar_back)
     ImageView backIcon;
     @BindView(R.id.article_author_input)

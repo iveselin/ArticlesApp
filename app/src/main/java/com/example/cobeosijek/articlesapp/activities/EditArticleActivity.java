@@ -20,6 +20,7 @@ import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 import com.example.cobeosijek.articlesapp.utils.StringUtils;
 
+import butterknife.BindString;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -28,9 +29,6 @@ public class EditArticleActivity extends AppCompatActivity implements AdapterVie
 
     private static final String KEY_ID_SEND = "key_send";
 
-    private Article articleToEdit;
-    private ArticleTypeEnum typeSelected;
-    private ArrayAdapter<ArticleTypeEnum> spinnerAdapter;
     @BindView(R.id.action_bar_back)
     ImageView backIcon;
     @BindView(R.id.article_author_input)
@@ -43,6 +41,13 @@ public class EditArticleActivity extends AppCompatActivity implements AdapterVie
     Spinner typeInput;
     @BindView(R.id.submit_article)
     Button submitArticle;
+
+    @BindString(R.string.empty_text_error)
+    String errorMessage;
+
+    private Article articleToEdit;
+    private ArticleTypeEnum typeSelected;
+    private ArrayAdapter<ArticleTypeEnum> spinnerAdapter;
 
     public static Intent getLaunchIntent(Context launchContext, int articleID) {
         return new Intent(launchContext, EditArticleActivity.class).putExtra(KEY_ID_SEND, articleID);
@@ -85,7 +90,6 @@ public class EditArticleActivity extends AppCompatActivity implements AdapterVie
         }
     }
 
-
     @OnClick(R.id.submit_article)
     protected void editArticle() {
         if (checkUserInputValid()) {
@@ -108,17 +112,17 @@ public class EditArticleActivity extends AppCompatActivity implements AdapterVie
         boolean inputIsValid = true;
 
         if (StringUtils.checkIfEmpty(titleInput.getText().toString().trim())) {
-            titleInput.setError(getString(R.string.empty_text_error));
+            titleInput.setError(errorMessage);
             inputIsValid = false;
         }
 
         if (StringUtils.checkIfEmpty(authorInput.getText().toString().trim())) {
-            authorInput.setError(getString(R.string.empty_text_error));
+            authorInput.setError(errorMessage);
             inputIsValid = false;
         }
 
         if (StringUtils.checkIfEmpty(descriptionInput.getText().toString().trim())) {
-            descriptionInput.setError(getString(R.string.empty_text_error));
+            descriptionInput.setError(errorMessage);
             inputIsValid = false;
         }
 
