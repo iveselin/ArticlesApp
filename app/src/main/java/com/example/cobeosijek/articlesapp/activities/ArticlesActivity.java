@@ -1,5 +1,7 @@
 package com.example.cobeosijek.articlesapp.activities;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -24,20 +26,24 @@ public class ArticlesActivity extends AppCompatActivity implements View.OnClickL
 
     @BindView(R.id.no_data_message)
     TextView noDataMessage;
+
     @BindView(R.id.articles_list)
     RecyclerView articlesList;
+
     @BindView(R.id.add_articles)
     FloatingActionButton addArticleBTN;
 
     private ArticleAdapter articleAdapter;
 
+    public static Intent getLaunchIntent(Context from) {
+        return new Intent(from, ArticlesActivity.class);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_articles);
         ButterKnife.bind(this);
-
 
         setUI();
     }

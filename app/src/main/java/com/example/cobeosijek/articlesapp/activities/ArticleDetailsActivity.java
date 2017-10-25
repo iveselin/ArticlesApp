@@ -23,14 +23,19 @@ public class ArticleDetailsActivity extends AppCompatActivity {
 
     @BindView(R.id.action_bar_back)
     ImageView backIcon;
+
     @BindView(R.id.action_bar_edit)
     ImageView editIcon;
+
     @BindView(R.id.article_title_output)
     TextView titleOutput;
+
     @BindView(R.id.article_author_output)
     TextView authorOutput;
+
     @BindView(R.id.article_type_output)
     TextView typeOutput;
+
     @BindView(R.id.article_description_text_output)
     TextView descriptionOutput;
 

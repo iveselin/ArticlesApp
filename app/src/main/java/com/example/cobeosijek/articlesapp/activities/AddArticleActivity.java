@@ -26,14 +26,19 @@ public class AddArticleActivity extends AppCompatActivity implements AdapterView
 
     @BindView(R.id.action_bar_back)
     ImageView backIcon;
+
     @BindView(R.id.article_author_input)
     EditText authorInput;
+
     @BindView(R.id.article_title_input)
     EditText titleInput;
+
     @BindView(R.id.article_description_text_input)
     EditText descriptionInput;
+
     @BindView(R.id.article_type_input)
     Spinner typeInput;
+
     @BindView(R.id.submit_article)
     Button submitArticle;
 
@@ -74,7 +79,6 @@ public class AddArticleActivity extends AppCompatActivity implements AdapterView
             DBHelper.getInstance().addArticle(articleToSave);
             finish();
         }
-
     }
 
     private boolean checkUserInputValid() {
