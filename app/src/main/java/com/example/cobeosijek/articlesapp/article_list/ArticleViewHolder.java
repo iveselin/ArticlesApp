@@ -15,6 +15,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
     private ArticleAdapter.OnItemClickListener listener;
     TextView articleTitle;
     TextView articleAuthor;
+    private int articleId;
 
 
     public ArticleViewHolder(View itemView, ArticleAdapter.OnItemClickListener listener) {
@@ -31,15 +32,21 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder implements View.O
     @Override
     public void onClick(View view) {
         if (listener != null) {
-            listener.onItemClick(view, getAdapterPosition());
+            listener.onItemClick(view, articleId);
         }
     }
 
     @Override
     public boolean onLongClick(View view) {
-        if (listener!=null){
-            listener.onItemLongClick(view, getAdapterPosition());
+        if (listener != null) {
+            listener.onItemLongClick(view, articleId);
         }
-       return true;
+        return true;
     }
+
+    public void setArticleId(int articleId) {
+        this.articleId = articleId;
+    }
+
+
 }

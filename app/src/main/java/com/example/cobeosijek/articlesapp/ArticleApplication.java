@@ -10,9 +10,14 @@ import io.realm.RealmConfiguration;
  */
 
 public class ArticleApplication extends Application {
+
+    private static ArticleApplication instance;
+
     @Override
     public void onCreate() {
         super.onCreate();
+
+        setInstance(this);
 
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder()
@@ -21,7 +26,14 @@ public class ArticleApplication extends Application {
         Realm.setDefaultConfiguration(realmConfig);
     }
 
-    public static Realm getDBinstance() {
-        return Realm.getDefaultInstance();
+    private static void setInstance(ArticleApplication instanceToAdd) {
+        instance = instanceToAdd;
     }
+
+    public static ArticleApplication getInstance() {
+        return instance;
+    }
+
+
+    // TODO: 25/10/2017 lazy singleton
 }

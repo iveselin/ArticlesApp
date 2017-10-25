@@ -17,9 +17,9 @@ import java.util.List;
 public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int articleId);
 
-        void onItemLongClick(View view, int position);
+        void onItemLongClick(View view, int articleId);
     }
 
     private List<Article> articles = new ArrayList<>();
@@ -53,6 +53,7 @@ public class ArticleAdapter extends RecyclerView.Adapter<ArticleViewHolder> {
 
         holder.articleTitle.setText(article.getArticleTitle());
         holder.articleAuthor.setText(article.getArticleAuthor());
+        holder.setArticleId(article.getArticleID());
     }
 
     @Override

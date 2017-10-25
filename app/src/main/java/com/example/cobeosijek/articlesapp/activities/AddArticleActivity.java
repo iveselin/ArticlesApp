@@ -12,22 +12,30 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-import com.example.cobeosijek.articlesapp.ArticleApplication;
 import com.example.cobeosijek.articlesapp.R;
 import com.example.cobeosijek.articlesapp.article_list.Article;
 import com.example.cobeosijek.articlesapp.article_list.ArticleTypeEnum;
 import com.example.cobeosijek.articlesapp.db_utils.DBHelper;
 import com.example.cobeosijek.articlesapp.utils.StringUtils;
 
-public class AddArticleActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
+public class AddArticleActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+    @BindView(R.id.action_bar_back)
     ImageView backIcon;
+    @BindView(R.id.article_author_input)
     EditText authorInput;
+    @BindView(R.id.article_title_input)
     EditText titleInput;
+    @BindView(R.id.article_description_text_input)
     EditText descriptionInput;
+    @BindView(R.id.article_type_input)
     Spinner typeInput;
+    @BindView(R.id.submit_article)
     Button submitArticle;
-    DBHelper dbHelper;
+
     private ArticleTypeEnum typeSelected;
 
     public static Intent getLaunchIntent(Context context) {
@@ -38,47 +46,31 @@ public class AddArticleActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_article);
+        ButterKnife.bind(this);
 
-        dbHelper = new DBHelper(ArticleApplication.getDBinstance());
         setUI();
     }
 
     private void setUI() {
-        backIcon = findViewById(R.id.action_bar_back);
-        authorInput = findViewById(R.id.article_author_input);
-        titleInput = findViewById(R.id.article_title_input);
-        descriptionInput = findViewById(R.id.article_description_text_input);
-        typeInput = findViewById(R.id.article_type_input);
-        submitArticle = findViewById(R.id.submit_article);
-
-        backIcon.setOnClickListener(this);
-        submitArticle.setOnClickListener(this);
-
+        // TODO: 25/10/2017 what if enum needs to be translated?!
         ArrayAdapter<ArticleTypeEnum> spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ArticleTypeEnum.values());
         typeInput.setAdapter(spinnerAdapter);
         typeInput.setOnItemSelectedListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.action_bar_back:
-                onBackPressed();
-                break;
-            case R.id.submit_article:
-                //sendArticleBack();
-                saveArticle();
-                break;
-        }
+    @OnClick(R.id.action_bar_back)
+    protected void goBack() {
+        onBackPressed();
     }
 
-    private void saveArticle() {
+    @OnClick(R.id.submit_article)
+    protected void saveArticle() {
         if (checkUserInputValid()) {
             Article articleToSave = new Article(titleInput.getText().toString().trim(),
                     authorInput.getText().toString().trim(),
                     descriptionInput.getText().toString().trim(),
                     typeSelected);
-            dbHelper.addArticle(articleToSave);
+            DBHelper.getInstance().addArticle(articleToSave);
             finish();
         }
 
@@ -115,10 +107,5 @@ public class AddArticleActivity extends AppCompatActivity implements View.OnClic
         typeSelected = ArticleTypeEnum.OTHER;
     }
 
-//    private void sendArticleBack() {
-//
-//        Article article = new Article(titleInput.getText().toString(), authorInput.getText().toString(), descriptionInput.getText().toString(), ArticleTypeEnum.DEVELOP);
-//        setResult(RESULT_OK, ArticlesActivity.getResultArticleIntent(article));
-//        finish();
-//    }
+
 }

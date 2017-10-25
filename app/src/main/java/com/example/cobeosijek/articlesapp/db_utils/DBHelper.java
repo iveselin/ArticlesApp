@@ -13,8 +13,17 @@ import io.realm.Realm;
 public class DBHelper {
     private Realm realm;
 
-    public DBHelper(Realm realm) {
+    private static DBHelper instance = null;
+
+    private DBHelper(Realm realm) {
         this.realm = realm;
+    }
+
+    public static DBHelper getInstance() {
+        if (instance == null) {
+            instance = new DBHelper(Realm.getDefaultInstance());
+        }
+        return instance;
     }
 
     public void addArticle(Article article) {
@@ -44,15 +53,13 @@ public class DBHelper {
         }
     }
 
-    public void removeArticle(Article article) {
-        if (article != null) {
-            realm.beginTransaction();
-            Article articleToDelete = realm.where(Article.class).equalTo("articleTitle", article.getArticleTitle()).findFirst();
-            if (articleToDelete != null) {
-                articleToDelete.deleteFromRealm();
-            }
-            realm.commitTransaction();
+    public void removeArticle(int articleId) {
+        realm.beginTransaction();
+        Article articleToDelete = realm.where(Article.class).equalTo("articleID", articleId).findFirst();
+        if (articleToDelete != null) {
+            articleToDelete.deleteFromRealm();
         }
+        realm.commitTransaction();
     }
 
     public Article getArticle(int articleID) {
