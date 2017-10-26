@@ -19,8 +19,10 @@ import butterknife.OnClick;
  * Created by Ivan on 25.10.2017..
  */
 
-public class ThirdOnboardFragment extends Fragment {
-    
+public class ThirdOnBoardFragment extends Fragment {
+
+    private final int fragmentNumber = 3;
+
     @BindView(R.id.back_icon)
     ImageView backIcon;
 
@@ -31,6 +33,11 @@ public class ThirdOnboardFragment extends Fragment {
     TextView welcomeText;
 
     private OnBackPressedFragmentListener listener;
+
+    public static ThirdOnBoardFragment newInstance() {
+        ThirdOnBoardFragment fragment = new ThirdOnBoardFragment();
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -47,7 +54,7 @@ public class ThirdOnboardFragment extends Fragment {
     }
 
     private void setUI() {
-        welcomeText.setText("Ok now you are ready, start!");
+        welcomeText.setText("You think you got this? Go ahead\nStill insecure? Go back");
     }
 
     public void setOnBackClickedListener(OnBackPressedFragmentListener listener) {
@@ -56,11 +63,11 @@ public class ThirdOnboardFragment extends Fragment {
 
     @OnClick(R.id.back_icon)
     protected void onBackClick() {
-        listener.onBackClicked(3);
+        listener.onBackClicked(fragmentNumber);
     }
 
     @OnClick(R.id.forward_icon)
-    protected void OnForwardClick() {
-        listener.onForwardClicked(3);
+    protected void onForwardClick() {
+        listener.onForwardClicked(fragmentNumber);
     }
 }

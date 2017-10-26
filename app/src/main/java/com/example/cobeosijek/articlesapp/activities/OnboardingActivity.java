@@ -1,16 +1,15 @@
 package com.example.cobeosijek.articlesapp.activities;
 
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.cobeosijek.articlesapp.R;
-import com.example.cobeosijek.articlesapp.onboard.FirstOnboardFragment;
+import com.example.cobeosijek.articlesapp.base.BaseActivity;
+import com.example.cobeosijek.articlesapp.onboard.FirstOnBoardFragment;
 import com.example.cobeosijek.articlesapp.onboard.OnBackPressedFragmentListener;
-import com.example.cobeosijek.articlesapp.onboard.SecondOnboardFragment;
-import com.example.cobeosijek.articlesapp.onboard.ThirdOnboardFragment;
+import com.example.cobeosijek.articlesapp.onboard.SecondOnBoardFragment;
+import com.example.cobeosijek.articlesapp.onboard.ThirdOnBoardFragment;
 
-public class OnboardingActivity extends AppCompatActivity implements OnBackPressedFragmentListener {
+public class OnboardingActivity extends BaseActivity implements OnBackPressedFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +20,9 @@ public class OnboardingActivity extends AppCompatActivity implements OnBackPress
             if (savedInstanceState != null) {
                 return;
             }
-            FirstOnboardFragment firstFragment = new FirstOnboardFragment();
+            FirstOnBoardFragment firstFragment = FirstOnBoardFragment.newInstance();
             firstFragment.setOnBackClickedListener(this);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container, firstFragment).commit();
+            addFragment(firstFragment, R.id.fragment_container);
         }
     }
 
@@ -34,28 +32,33 @@ public class OnboardingActivity extends AppCompatActivity implements OnBackPress
     }
 
     @Override
+    public void onBackPressed() {
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
     public void onForwardClicked(int fragmentNumber) {
         switch (fragmentNumber) {
             case 1:
-                SecondOnboardFragment secondFragment = new SecondOnboardFragment();
+                SecondOnBoardFragment secondFragment = SecondOnBoardFragment.newInstance();
                 secondFragment.setOnBackClickedListener(this);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, secondFragment)
-                        .addToBackStack(null)
-                        .commit();
+                replaceFragment(secondFragment, R.id.fragment_container, true);
                 break;
             case 2:
-                ThirdOnboardFragment thirdFrament = new ThirdOnboardFragment();
-                thirdFrament.setOnBackClickedListener(this);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, thirdFrament)
-                        .addToBackStack(null)
-                        .commit();
+                ThirdOnBoardFragment thirdFragment = ThirdOnBoardFragment.newInstance();
+                thirdFragment.setOnBackClickedListener(this);
+                replaceFragment(thirdFragment, R.id.fragment_container, true);
                 break;
             case 3:
                 startActivity(ArticlesActivity.getLaunchIntent(this));
+                finish();
                 break;
         }
     }
+
 
 }

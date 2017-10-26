@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.articlesapp.R;
-import com.example.cobeosijek.articlesapp.activities.ArticlesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,8 +20,9 @@ import butterknife.OnClick;
  * Created by Ivan on 25.10.2017..
  */
 
-public class FirstOnboardFragment extends Fragment {
+public class FirstOnBoardFragment extends Fragment {
 
+    private final int fragmentNumber = 1;
 
     @BindView(R.id.back_icon)
     ImageView backIcon;
@@ -34,6 +34,11 @@ public class FirstOnboardFragment extends Fragment {
     TextView welcomeText;
 
     private OnBackPressedFragmentListener listener;
+
+    public static FirstOnBoardFragment newInstance() {
+        FirstOnBoardFragment fragment = new FirstOnBoardFragment();
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -58,9 +63,8 @@ public class FirstOnboardFragment extends Fragment {
     }
 
 
-
     @OnClick(R.id.forward_icon)
     protected void OnForwardClick() {
-        listener.onForwardClicked(1);
+        listener.onForwardClicked(fragmentNumber);
     }
 }

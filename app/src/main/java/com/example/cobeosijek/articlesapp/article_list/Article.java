@@ -6,7 +6,7 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
-import static com.example.cobeosijek.articlesapp.article_list.BaseModel.*;
+import static com.example.cobeosijek.articlesapp.base.BaseModel.*;
 
 /**
  * Created by cobeosijek on 23/10/2017.

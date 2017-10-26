@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cobeosijek.articlesapp.R;
-import com.example.cobeosijek.articlesapp.activities.ArticlesActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,7 +20,9 @@ import butterknife.OnClick;
  * Created by Ivan on 25.10.2017..
  */
 
-public class SecondOnboardFragment extends Fragment {
+public class SecondOnBoardFragment extends Fragment {
+
+    private final int fragmentNumber = 2;
 
     @BindView(R.id.back_icon)
     ImageView backIcon;
@@ -33,6 +34,11 @@ public class SecondOnboardFragment extends Fragment {
     TextView welcomeText;
 
     private OnBackPressedFragmentListener listener;
+
+    public static SecondOnBoardFragment newInstance() {
+        SecondOnBoardFragment fragment = new SecondOnBoardFragment();
+        return fragment;
+    }
 
     @Nullable
     @Override
@@ -49,7 +55,7 @@ public class SecondOnboardFragment extends Fragment {
     }
 
     private void setUI() {
-        welcomeText.setText("This is a second fragment in which you will have detailed explanation");
+        welcomeText.setText("This is an article list app in which you can read articles by clicking on them, delete articles by holding your finger on them, add articles by clicking on the + icon and edit articles by pressing on the pen icon.");
     }
 
     public void setOnBackClickedListener(OnBackPressedFragmentListener listener) {
@@ -58,12 +64,12 @@ public class SecondOnboardFragment extends Fragment {
 
     @OnClick(R.id.back_icon)
     protected void onBackClick() {
-        listener.onBackClicked(2);
+        listener.onBackClicked(fragmentNumber);
     }
 
     @OnClick(R.id.forward_icon)
     protected void OnForwardClick() {
-        listener.onForwardClicked(2);
+        listener.onForwardClicked(fragmentNumber);
     }
 
 }

@@ -35,5 +35,4 @@
         android:rotation="180"
         android:src="@drawable/back_icon" />
 
-
 </RelativeLayout>
